@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
             body: OrientationBuilder(builder: (context, orientation) {
               orientation == Orientation.portrait ? m = 5 : m = 0;
               return Container(
-                  padding: EdgeInsets.all(15.0),
                   height: double.infinity,
                   decoration: BoxDecoration(
                       image: DecorationImage(
