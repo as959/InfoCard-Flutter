@@ -5,27 +5,6 @@ void main() {
   runApp(MyApp());
 }
 
-class CustomAppBar extends PreferredSize {
-  final Widget child;
-  final double height;
-
-  CustomAppBar({@required this.child, this.height = kToolbarHeight});
-
-  @override
-  Size get preferredSize => Size.fromHeight(height);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(10, 50, 10, 0),
-      height: preferredSize.height,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
-      alignment: Alignment.center,
-      child: child,
-    );
-  }
-}
-
 class MyApp extends StatelessWidget {
   ScrollController _controller;
   var nameList = [
@@ -61,78 +40,89 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-            appBar: CustomAppBar(
-              height: 150,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
+            backgroundColor: null,
+            body: Stack(alignment: Alignment.topCenter, children: <Widget>[
+              Container(
+                  height: double.infinity,
+                  color: Colors.black,
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    alignment: Alignment.center,
+                    child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        padding: const EdgeInsets.all(10),
+                        controller: _controller,
+                        itemCount: nameList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return CustomCard(nameList, index);
+                        }),
+                  )),
+              ClipRRect(
+                  child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 2, sigmaY: 1),
+                child: Container(
+                  height: 150,
+                  padding: EdgeInsets.fromLTRB(10, 50, 10, 0),
+                  color: Color.fromRGBO(0, 0, 0, 0.8),
+                  alignment: Alignment.center,
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      IconButton(
-                          icon: Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.white,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          IconButton(
+                              icon: Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                              ),
+                              onPressed: null),
+                          Expanded(
+                            child: Container(
+                                height: 40,
+                                padding: EdgeInsets.only(left: 20),
+                                decoration: BoxDecoration(
+                                    color: Colors.grey[600],
+                                    borderRadius: BorderRadius.circular(20.0)),
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                      hintText: 'Search',
+                                      border: InputBorder.none),
+                                )),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          SizedBox(
+                            width: 50,
                           ),
-                          onPressed: null),
-                      Expanded(
-                        child: Container(
-                            height: 40,
-                            padding: EdgeInsets.only(left: 20),
-                            decoration: BoxDecoration(
-                                color: Colors.grey[600],
-                                borderRadius: BorderRadius.circular(20.0)),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  hintText: 'Search', border: InputBorder.none),
-                            )),
+                          Expanded(
+                            child: Text(
+                              'Panchavati',
+                              style:
+                                  TextStyle(color: Colors.blue, fontSize: 12.0),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(0),
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.filter_list,
+                                size: 25,
+                                color: Colors.white,
+                              ),
+                              onPressed: null,
+                            ),
+                          ),
+                        ],
                       )
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      SizedBox(
-                        width: 50,
-                      ),
-                      Expanded(
-                        child: Text(
-                          'Panchavati',
-                          style: TextStyle(color: Colors.blue, fontSize: 12.0),
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(0),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.filter_list,
-                            size: 25,
-                            color: Colors.white,
-                          ),
-                          onPressed: null,
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            backgroundColor: null,
-            body: Container(
-                height: double.infinity,
-                color: Colors.black,
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  alignment: Alignment.center,
-                  child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      padding: const EdgeInsets.all(10),
-                      controller: _controller,
-                      itemCount: nameList.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return CustomCard(nameList, index);
-                      }),
-                ))));
+                ),
+              ))
+            ])));
   }
 }
 
