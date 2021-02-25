@@ -59,11 +59,11 @@ class MyApp extends StatelessWidget {
                   )),
               ClipRRect(
                   child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 2, sigmaY: 1),
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Container(
                   height: 150,
                   padding: EdgeInsets.fromLTRB(10, 50, 10, 0),
-                  color: Color.fromRGBO(0, 0, 0, 0.8),
+                  color: Color.fromRGBO(255, 255, 255, 0.1),
                   alignment: Alignment.center,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -82,11 +82,11 @@ class MyApp extends StatelessWidget {
                                 height: 40,
                                 padding: EdgeInsets.only(left: 20),
                                 decoration: BoxDecoration(
-                                    color: Colors.grey[600],
+                                    color: Color.fromRGBO(255, 255, 255, 0.3),
                                     borderRadius: BorderRadius.circular(20.0)),
                                 child: TextField(
                                   decoration: InputDecoration(
-                                      hintText: 'Search',
+                                      icon: Icon(Icons.search),
                                       border: InputBorder.none),
                                 )),
                           )
@@ -101,8 +101,8 @@ class MyApp extends StatelessWidget {
                           Expanded(
                             child: Text(
                               'Panchavati',
-                              style:
-                                  TextStyle(color: Colors.blue, fontSize: 12.0),
+                              style: TextStyle(
+                                  color: Colors.blue[400], fontSize: 12.0),
                             ),
                           ),
                           Container(
@@ -143,199 +143,221 @@ class CustomCard extends StatelessWidget {
         width: 280,
         height: 190,
         decoration: BoxDecoration(
-          color: Colors.grey[800],
+          color: index == 0 ? Colors.black : Colors.grey[800],
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
         ),
-        child: Column(
-          children: <Widget>[
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                    child: Row(
-                  children: <Widget>[
-                    Text(" 09",
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500)),
-                    Container(
-                        margin: EdgeInsets.all(5),
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5.0),
-                            image: DecorationImage(
-                                image: AssetImage(
-                                    'assets/doctor_profile_image.png')))),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          nameList[index][0],
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text(nameList[index][1],
-                                style: TextStyle(fontSize: 12)),
-                            Text(
-                              " | ",
-                              style: TextStyle(fontWeight: FontWeight.w800),
-                            ),
-                            Text(nameList[index][2],
-                                style: TextStyle(fontSize: 12)),
-                            Icon(Icons.thumb_up, color: Colors.blue, size: 16)
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                )),
-                Column(
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      height: 20,
-                      child: IconButton(
-                          icon: Icon(
-                            Icons.verified_user,
-                            color: Colors.green[700],
-                            size: 18,
+        child: index == 0
+            ? SizedBox(
+                height: 100,
+              )
+            : Column(
+                children: <Widget>[
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Container(
+                          child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(" 09",
+                              style: TextStyle(
+                                  fontSize: 12, fontWeight: FontWeight.w500)),
+                          Container(
+                              margin:
+                                  EdgeInsets.only(left: 5, right: 5, top: 2),
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/doctor_profile_image.png')))),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                nameList[index][0],
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w500),
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text(nameList[index][1],
+                                      style: TextStyle(fontSize: 14)),
+                                  Text(
+                                    " | ",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.w800),
+                                  ),
+                                  Text(nameList[index][2],
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold)),
+                                  Icon(Icons.thumb_up,
+                                      color: Colors.blue, size: 16)
+                                ],
+                              ),
+                            ],
                           ),
-                          onPressed: null),
-                    ),
-                    Container(
-                        padding: EdgeInsets.all(5),
-                        height: 20,
-                        child: IconButton(
-                            icon: Icon(
-                              Icons.bookmark_border,
-                              color: Colors.white,
-                              size: 18,
-                            ),
-                            onPressed: null)),
-                    Container(
-                        padding: EdgeInsets.all(5),
-                        height: 20,
-                        child: IconButton(
-                            icon: Icon(
-                              Icons.videocam,
-                              color: Colors.white,
-                              size: 18,
-                            ),
-                            onPressed: null))
-                  ],
-                )
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Expanded(
-                  child: Text(nameList[index][3],
-                      style: TextStyle(fontSize: 14, color: Colors.white)),
-                ),
-                FlatButton(
-                    onPressed: null,
-                    child: Container(
-                      padding: EdgeInsets.all(5),
-                      child: Text(" ₹ 750 ",
-                          style: TextStyle(fontSize: 15, color: Colors.white)),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[500],
-                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                      ),
-                    ))
-              ],
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  flex: 3,
-                  child: RichText(
-                    text: TextSpan(
-                      style: TextStyle(
-                        fontSize: 14.0,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: '778\n',
+                        ],
+                      )),
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.all(0),
+                            height: 20,
+                            child: IconButton(
+                                icon: Icon(
+                                  Icons.verified_user,
+                                  color: Colors.green,
+                                  size: 18,
+                                ),
+                                onPressed: null),
+                          ),
+                          Container(
+                              padding: EdgeInsets.all(0),
+                              height: 20,
+                              child: IconButton(
+                                  icon: Icon(
+                                    Icons.bookmark_border,
+                                    color: Colors.white,
+                                    size: 18,
+                                  ),
+                                  onPressed: null)),
+                          Container(
+                              padding: EdgeInsets.all(0),
+                              height: 20,
+                              child: IconButton(
+                                  icon: Icon(
+                                    Icons.videocam,
+                                    color: Colors.white,
+                                    size: 18,
+                                  ),
+                                  onPressed: null))
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(nameList[index][3],
                             style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                        TextSpan(
-                            text: 'Feedback',
-                            style: TextStyle(color: Colors.grey[300])),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: RichText(
-                    text: TextSpan(
-                      style: TextStyle(
-                        fontSize: 14.0,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
                       ),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: '~3.2km~\n',
+                      FlatButton(
+                          onPressed: null,
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            child: Text(" ₹ 750 ",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white)),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[600],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15.0)),
+                            ),
+                          ))
+                    ],
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 3,
+                        child: RichText(
+                          text: TextSpan(
                             style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                        TextSpan(
-                            text: 'Gunjan Baba Nagar',
-                            style: TextStyle(color: Colors.grey[300])),
-                      ],
-                    ),
+                              fontSize: 14.0,
+                            ),
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: '778\n',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15)),
+                              TextSpan(
+                                  text: 'Feedback',
+                                  style: TextStyle(
+                                      color: Colors.grey[300], fontSize: 15)),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 4,
+                        child: RichText(
+                          text: TextSpan(
+                            style: TextStyle(
+                              fontSize: 14.0,
+                            ),
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: '~3.2km~\n',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15)),
+                              TextSpan(
+                                  text: 'Gunjan Baba Nagar',
+                                  style: TextStyle(color: Colors.grey[400])),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: FlatButton(
+                          padding: EdgeInsets.all(0),
+                          onPressed: null,
+                          child: Container(
+                              padding: EdgeInsets.all(5),
+                              margin: EdgeInsets.only(right: 2),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  border: Border.all(
+                                      color: Colors.green[800], width: 1.5)),
+                              child: Text(
+                                ' Call ',
+                                style: TextStyle(
+                                    fontSize: 14, color: Colors.white),
+                              )),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: FlatButton(
+                          padding: EdgeInsets.all(0),
+                          onPressed: null,
+                          child: Container(
+                              padding: EdgeInsets.all(5),
+                              margin: EdgeInsets.only(left: 2),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  border: Border.all(
+                                      color: Colors.green[800], width: 1.5)),
+                              child: Text(
+                                'Book',
+                                style: TextStyle(
+                                    fontSize: 14, color: Colors.white),
+                              )),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: FlatButton(
-                    padding: EdgeInsets.all(0),
-                    onPressed: null,
-                    child: Container(
-                        padding: EdgeInsets.all(5),
-                        margin: EdgeInsets.only(right: 2),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            border:
-                                Border.all(color: Colors.green[700], width: 2)),
-                        child: Text(
-                          ' Call ',
-                          style: TextStyle(fontSize: 14, color: Colors.white),
-                        )),
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: FlatButton(
-                    padding: EdgeInsets.all(0),
-                    onPressed: null,
-                    child: Container(
-                        padding: EdgeInsets.all(5),
-                        margin: EdgeInsets.only(left: 2),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            border:
-                                Border.all(color: Colors.green[700], width: 2)),
-                        child: Text(
-                          'Book',
-                          style: TextStyle(fontSize: 14, color: Colors.white),
-                        )),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ));
+                ],
+              ));
   }
 }
